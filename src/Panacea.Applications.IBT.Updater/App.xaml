@@ -1,9 +1,9 @@
-﻿<panaceaLib:SingleInstanceApp
+﻿<panaceaLib1:SingleInstanceApp
+    xmlns:panaceaLib1="clr-namespace:System.Windows.ApplicationExtensions;assembly=System.Windows.ApplicationExtensions"
     x:Class="IBT.Updater.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:panaceaLib="clr-namespace:PanaceaLib"
     DispatcherUnhandledException="Application_DispatcherUnhandledException"
     Startup="App_OnStartup">
-    <panaceaLib:SingleInstanceApp.Resources />
-</panaceaLib:SingleInstanceApp>
+    <panaceaLib1:SingleInstanceApp.Resources />
+</panaceaLib1:SingleInstanceApp>

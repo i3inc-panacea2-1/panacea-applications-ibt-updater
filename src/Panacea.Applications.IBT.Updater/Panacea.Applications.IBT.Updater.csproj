@@ -133,8 +133,6 @@
     <Compile Include="Modules\SystemUpdatesModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SafeDictionary.cs" />
-    <Compile Include="SingleInstance.cs" />
-    <Compile Include="SingleInstanceApp.cs" />
     <Compile Include="SystemUpdater.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +207,9 @@
     </PackageReference>
     <PackageReference Include="System.Management.Automation">
       <Version>6.1.7601.17515</Version>
+    </PackageReference>
+    <PackageReference Include="System.Windows.ApplicationExtensions">
+      <Version>0.0.2</Version>
     </PackageReference>
     <PackageReference Include="TaskScheduler">
       <Version>2.8.12</Version>

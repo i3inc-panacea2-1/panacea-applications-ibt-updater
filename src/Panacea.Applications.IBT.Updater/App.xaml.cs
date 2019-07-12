@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.ApplicationExtensions;
 using System.Windows.Threading;
 using PanaceaLib;
 
