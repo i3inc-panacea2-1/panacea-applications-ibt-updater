@@ -18,16 +18,16 @@ namespace IBT.Updater
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App :  SingleInstanceApp
+    public partial class App : SingleInstanceApp
     {
-	    public App() : base("IBT.Updater")
-	    {
-			InitializeComponent();
+        public App() : base("IBT.Updater")
+        {
+            InitializeComponent();
             ServicePointManager.MaxServicePointIdleTime = 10000;
             ServicePointManager.Expect100Continue = false;
         }
 
-	    private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             try
             {
@@ -53,17 +53,13 @@ namespace IBT.Updater
         {
             if (_shuttingDown) return;
             _shuttingDown = true;
-            try
+
+            var process = Process.GetProcessesByName("PanaceaLauncher").FirstOrDefault();
+            if (process == null && runLauncher)
             {
-                var process = Process.GetProcessesByName("PanaceaLauncher").FirstOrDefault();
-                if (process == null && runLauncher)
-                {
-                    Process.Start(Common.Path() + "..\\Applications\\Launcher\\PanaceaLauncher.exe");
-                }
+                Process.Start(Common.Path() + "..\\Applications\\Launcher\\PanaceaLauncher.exe");
             }
-            catch
-            {
-            }
+
             SingleInstance<App>.Cleanup();
             Current.Shutdown();
         }
@@ -82,7 +78,7 @@ namespace IBT.Updater
                 try
                 {
                     var runtimePath = runtimePathFile;
-                    if(runtimePathFile.EndsWith("\\"))
+                    if (runtimePathFile.EndsWith("\\"))
                         runtimePath = Path.GetDirectoryName(runtimePathFile);
 
                     if (runtimePath + "\\Updater" != Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
@@ -109,12 +105,13 @@ namespace IBT.Updater
             {
                 ShowWindow();
             }
-            
+
         }
 
         void ShowWindow()
         {
-            if (!Args.Contains("noupdate=1")){
+            if (!Args.Contains("noupdate=1"))
+            {
                 try
                 {
                     KillProcesses("PanaceaLauncher", "Panacea", "SystemSetup", "PanaceaRegistrator", "ServerCommunicator",
@@ -126,7 +123,7 @@ namespace IBT.Updater
                     //ignore
                 }
             }
-            MainWindow w=new MainWindow();
+            MainWindow w = new MainWindow();
             w.Show();
             w.Activate();
         }
