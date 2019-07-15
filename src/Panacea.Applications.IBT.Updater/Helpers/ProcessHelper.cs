@@ -16,8 +16,8 @@ namespace IBT.Updater.Helpers
         {
             App.ShutdownSafe();
             var localpath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
-            if (File.Exists(localpath + "\\PanaceaRegistrator.exe"))
-                Process.Start(localpath + "\\PanaceaRegistrator.exe", server);
+            if (File.Exists(localpath + "..\\Applications\\Registrator\\PanaceaRegistrator.exe"))
+                Process.Start(localpath + "..\\Applications\\Registrator\\PanaceaRegistrator.exe", server);
         }
 
         
