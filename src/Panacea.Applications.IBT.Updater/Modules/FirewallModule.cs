@@ -19,9 +19,10 @@ namespace IBT.Updater.Modules
             var path = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             path = path.Parent;
             AddFirewallException("Panacea", path.FullName + "\\Panacea.exe");
-            AddFirewallException("PanaceaServerCommunicator", path.FullName + "\\ServerCommunicator.exe");
-            AddFirewallException("PanaceaVLC", path.FullName + "\\Lib\\VlcMediaPlayer.exe");
-            AddFirewallException("GeckoSubProcess", path.FullName + "\\ibt-plugins\\WebBrowserGeckoEngine\\WebBrowserGeckoEngineSubProcess.exe");
+            AddFirewallException("PanaceaServerCommunicator", path.FullName + "\\Applications\\ServerCommunicator\\ServerCommunicator.exe");
+            AddFirewallException("PanaceaVLC", path.FullName + "\\ibt-plugins\\VlcMediaPlayer\\VlcProcess.exe");
+            AddFirewallException("Kurento", path.FullName + "\\ibt-plugins\\Kurento\\wampProxy\\ServiceHost.exe");
+            //AddFirewallException("GeckoSubProcess", path.FullName + "\\ibt-plugins\\WebBrowserGeckoEngine\\WebBrowserGeckoEngineSubProcess.exe");
             return true;
         }
 
