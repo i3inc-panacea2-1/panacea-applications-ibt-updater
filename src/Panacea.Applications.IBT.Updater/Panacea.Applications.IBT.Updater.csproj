@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Modules\CreateEventSourceModule.cs" />
     <Compile Include="PanaceaRegistry.cs" />
     <Compile Include="TerminalIdentificationClass.cs" />
     <Page Include="App.xaml">
