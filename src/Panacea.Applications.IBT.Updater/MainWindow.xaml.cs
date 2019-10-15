@@ -169,14 +169,14 @@ namespace IBT.Updater
                 OnProgressTotal($"A module reported failure ({moduleName}): {ex.Message} {ex.InnerException?.Message}");
                 await Task.Delay(10000);
                 App.ShutdownSafe(false);
-                Process.Start(Common.Path() + "Updater.Replacer.exe");
+                Process.Start(Common.Path("Updater.Replacer.exe"));
                 return;
             }
 
             if (_modules.Any(m => m.RequiresUpdaterRestart))
             {
                 App.ShutdownSafe(false);
-                Process.Start(Common.Path() + "Updater.Replacer.exe");
+                Process.Start(Common.Path( "Updater.Replacer.exe"));
                 return;
             }
             if (await LockdownManager.IsFrozen() == false && FreezeHelper.IsFreezeEnabled())
@@ -237,7 +237,7 @@ namespace IBT.Updater
                 {
                     updater.SetValue("ContinuousFailures", 0);
                     App.ShutdownSafe();
-                    Process.Start(Common.Path() + "Support\\SystemSetup\\SystemSetup.exe", "/automatic");
+                    Process.Start(Common.Path("..","Applications","SystemSetup","SystemSetup.exe"), "/automatic");
                 }
             }
         }
@@ -246,16 +246,17 @@ namespace IBT.Updater
         {
             App.ShutdownSafe();
 
-            var path = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\..\\");
-            Process.Start(Path.Combine(path, "Applications", "ServerCommunicator", "ServerCommunicator.exe"));
+            var reg = Common.Path("..", "Applications", "ServerCommunicator", "ServerCommunicator.exe");
+            if (File.Exists(reg))
+                Process.Start(reg);
 
-            path = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\..\\");
+            var panacea = Common.Path("..", "Panacea.exe");
+            if (File.Exists(panacea))
+            {
+                Process.Start(panacea, string.Join(" ", Environment.GetCommandLineArgs().Skip(1).Concat(new string[] { "noupdate=1" }).ToArray() ));
+            }
 
-            var index = Environment.CommandLine.IndexOf("\"", 1) + 1;
-
-            Process.Start(path + "Panacea.exe",
-                Environment.CommandLine.Substring(index, Environment.CommandLine.Length - index) +
-                " noupdate=1");
+          
         }
 
         #region event handlers
@@ -269,7 +270,7 @@ namespace IBT.Updater
             if (Environment.MachineName == "IMAGE")
             {
                 App.ShutdownSafe();
-                Process.Start(Common.Path() + "Support\\SystemSetup\\SystemSetup.exe", "/automatic");
+                Process.Start(Common.Path("..","Applications","SystemSetup","SystemSetup.exe"), "/automatic");
                 return;
             }
             if (!System.Diagnostics.Debugger.IsAttached)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PanaceaLib;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,13 +15,18 @@ namespace IBT.Updater.Helpers
     {
         internal static void StartRegistrator(string server)
         {
-            App.ShutdownSafe();
-            var localpath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
-            if (File.Exists(localpath + "..\\Applications\\Registrator\\PanaceaRegistrator.exe"))
-                Process.Start(localpath + "..\\Applications\\Registrator\\PanaceaRegistrator.exe", server);
+            var reg = Common.Path("..", "Applications", "Registrator", "PanaceaRegistrator.exe");
+            if (Debugger.IsAttached)
+            {
+                if (MessageBox.Show("Start registrator?", "Hey developer", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
+
+            }
+            if (File.Exists(reg))
+                Process.Start(reg, server);
         }
 
-        
+
 
         internal static void Reboot()
         {

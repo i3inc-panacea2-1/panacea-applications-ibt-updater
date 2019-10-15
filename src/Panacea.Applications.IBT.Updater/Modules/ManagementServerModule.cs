@@ -75,6 +75,8 @@ namespace IBT.Updater.Modules
             {
                 if (getHospitalServerResponse.Error != "self destruct")
                 {
+                    ReportProgress(getHospitalServerResponse.Error);
+                    await Task.Delay(4000);
                     ProcessHelper.StartRegistrator(_server);
                     App.ShutdownSafe();
                     return false;
@@ -103,6 +105,8 @@ namespace IBT.Updater.Modules
                         // ignored
                     }
                 }
+               
+
                 App.ShutdownSafe();
                 return false;
             }

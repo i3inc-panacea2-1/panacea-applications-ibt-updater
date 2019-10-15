@@ -48,9 +48,9 @@ namespace PanaceaLib
             return keys;
         } 
 
-        public static string Path()
+        public static string Path(params string[] parts)
         {
-            return System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\";
+            return System.IO.Path.Combine( new string[] { System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) }.Concat(parts).ToArray());
         }
 
 

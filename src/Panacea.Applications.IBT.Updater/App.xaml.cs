@@ -45,7 +45,7 @@ namespace IBT.Updater
         {
             SingleInstance<App>.Cleanup();
             Current.Shutdown();
-            Process.Start(Common.Path() + "IBT.Updater.exe");
+            Process.Start(Common.Path("IBT.Updater.exe"));
         }
 
         private static bool _shuttingDown;
@@ -57,7 +57,7 @@ namespace IBT.Updater
             var process = Process.GetProcessesByName("PanaceaLauncher").FirstOrDefault();
             if (process == null && runLauncher)
             {
-                Process.Start(Common.Path() + "..\\Applications\\Launcher\\PanaceaLauncher.exe");
+                Process.Start(Common.Path("..","Applications","Launcher","PanaceaLauncher.exe"));
             }
 
             SingleInstance<App>.Cleanup();
@@ -89,7 +89,7 @@ namespace IBT.Updater
                             Common.MoveDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                                 runtimePath + "\\Updater", false, false);
                         ShutdownSafe();
-                        Process.Start(runtimePath + "\\Applications\\SystemSetup\\SystemSetup.exe", "/automatic");
+                        Process.Start(runtimePath + "..\\Applications\\SystemSetup\\SystemSetup.exe", "/automatic");
 
                     }
                     else
